@@ -55,22 +55,23 @@ public class Principal {
         do{
             opc = 0;
             try{
-                opc = Integer.parseInt(JOptionPane.showInputDialog(frame, "Introduzca un dia[1-12]."));
+                opc = Integer.parseInt(JOptionPane.showInputDialog(frame, "Introduzca un dia[1-12]:", "12 días de navidad", 1));
             }catch(NumberFormatException e){
                 JOptionPane.showMessageDialog(frame, "Error de formato: " + e.getMessage(), "Excepcion", JOptionPane.WARNING_MESSAGE);
             }catch(Exception e){
                 JOptionPane.showMessageDialog(frame, "Error: " + e.getMessage(), "Excepcion", JOptionPane.WARNING_MESSAGE);
             }
 
-            for(int i=opc; i>0; i--){
-                try{
-                    JOptionPane.showMessageDialog(frame, obj_cancion.getLetra(i), "Cancion", JOptionPane.INFORMATION_MESSAGE, obj_cancion.getImagen(i)); 
-                }catch(ArrayIndexOutOfBoundsException e){
-                    JOptionPane.showMessageDialog(frame, "Valor fuera de rango: " + e.getMessage(), "Excepcion", JOptionPane.WARNING_MESSAGE);
-                }catch(Exception e){
-                    JOptionPane.showMessageDialog(frame, "Error: " + e.getMessage(), "Excepcion", JOptionPane.WARNING_MESSAGE);
-                }
-            }
+            if(opc > 0 && opc < 13){
+                for(int i=opc; i>0; i--){
+                    try{
+                        JOptionPane.showMessageDialog(frame, obj_cancion.getLetra(i), "Cancion", JOptionPane.INFORMATION_MESSAGE, obj_cancion.getImagen(i)); 
+                    }catch(ArrayIndexOutOfBoundsException e){
+                        JOptionPane.showMessageDialog(frame, "Valor fuera de rango: " + e.getMessage(), "Excepcion", JOptionPane.WARNING_MESSAGE);
+                    }catch(Exception e){
+                        JOptionPane.showMessageDialog(frame, "Error: " + e.getMessage(), "Excepcion", JOptionPane.WARNING_MESSAGE);
+                    }
+                }}
 
             try{
                 continuar = JOptionPane.showInputDialog(frame, "Escriba 'si' para continuar");
