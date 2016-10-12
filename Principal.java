@@ -2,10 +2,10 @@ import javax.swing.*;
 import java.io.*;
 
 class Cancion {
-    private String[] letra;
-    private ImageIcon[] imagen;
+    private String[] letra; //Arreglo con las letras de cada día
+    private ImageIcon[] imagen; //Arreglo con la imagen de cada día
 
-    Cancion(){
+    Cancion(){ //Método constructor. Da valores con la letra de la canción y la imagen de cada día
         letra = new String[12];
         imagen = new ImageIcon[12];
         letra[0] = "El primer día de navidad mi amor me regaló: una perdiz en un peral";
@@ -35,26 +35,27 @@ class Cancion {
         imagen[11] = new ImageIcon("image12.png");
     }
 
-    public String getLetra(int dia){
+    public String getLetra(int dia){ // Método que retorna el texto de la letra para un día específico
         return letra[dia-1];
     }
 
-    public ImageIcon getImagen(int dia){
+    public ImageIcon getImagen(int dia){ // Método que retorna la imagen para un día específico
         return imagen[dia-1];
     }
 }
 
 public class Principal {
     public static void main(String[] args) {
-        int opc;
-        String continuar;
-        JFrame frame = new JFrame("Proyecto 1");
-        Cancion obj_cancion = new Cancion();
+        int opc; // Determina el día seleccionado
+        String continuar; // Variable para controlar si continúa la ejecución
+        JFrame frame = new JFrame("Proyecto 1"); // Creación del marco principal
+        Cancion obj_cancion = new Cancion(); // Nuevo objeto Cancion. Se ejecuta el constructor
 
         JOptionPane.showMessageDialog(frame, "Los 12 días de navidad");
         do{
             opc = 0;
             try{
+                // Se lee el día correspondiente
                 opc = Integer.parseInt(JOptionPane.showInputDialog(frame, "Introduzca un dia[1-12]:", "12 días de navidad", 1));
             }catch(NumberFormatException e){
                 JOptionPane.showMessageDialog(frame, "Error de formato: " + e.getMessage(), "Excepcion", JOptionPane.WARNING_MESSAGE);
@@ -62,9 +63,10 @@ public class Principal {
                 JOptionPane.showMessageDialog(frame, "Error: " + e.getMessage(), "Excepcion", JOptionPane.WARNING_MESSAGE);
             }
 
-            if(opc > 0 && opc < 13){
-                for(int i=opc; i>0; i--){
+            if(opc > 0 && opc < 13){ // Para que el índice esté dentro del rango
+                for(int i=opc; i>0; i--){ // Para imprimir todos los días anteriores
                     try{
+                        // Aquí se muestra la ventana con la letra y el ícono correspondiente.
                         JOptionPane.showMessageDialog(frame, obj_cancion.getLetra(i), "Cancion", JOptionPane.INFORMATION_MESSAGE, obj_cancion.getImagen(i)); 
                     }catch(ArrayIndexOutOfBoundsException e){
                         JOptionPane.showMessageDialog(frame, "Valor fuera de rango: " + e.getMessage(), "Excepcion", JOptionPane.WARNING_MESSAGE);
@@ -77,9 +79,9 @@ public class Principal {
                 continuar = JOptionPane.showInputDialog(frame, "Escriba 'si' para continuar");
             }catch(Exception e){
                 JOptionPane.showMessageDialog(frame, "Error: " + e.getMessage(), "Excepcion", JOptionPane.WARNING_MESSAGE);
-                continuar = "si";
+                continuar = "si"; // Asignado para que no se detenga la ejecución y continúe con el ciclo.
             }
-        }while(continuar.equals("si"));
-        System.exit(0);
+        }while(continuar.equals("si")); // Determina si sale o no
+        System.exit(0); // Detiene la ejecución
     }
 }
